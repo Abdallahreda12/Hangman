@@ -1,0 +1,374 @@
+:root{
+    --width-hang:4px;
+    --color-hang:#222;
+}
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+hr{
+    border:2px solid #EEE; 
+}
+.container{
+    margin: 20px auto;
+    width:100%; 
+    padding: 0px 100px;
+}
+@media (max-width:674px){
+    .container{
+        padding: 0px 50px;
+    }
+}
+/* start game info */
+.game-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}
+.game-info .game-name{
+    font-size: 25px;
+    font-weight: bold;
+}
+.game-info .category{
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--color-hang);
+}
+.game-info .category span{
+    color: blue;
+}
+@media (max-width:434px){
+    .game-info{
+        flex-direction: column;
+    }
+}
+/* end game info */
+
+/* start row */
+.row{
+    display: flex;
+}
+.hangman-draw{
+    flex: 1;
+    padding: 20px;
+    height: 350px;
+}
+.hangman-draw .the-draw{
+    position: relative;
+    width: 60px;
+    height: 280px;
+    margin: auto;
+    border-bottom: var(--width-hang) solid var(--color-hang);
+    left: -25%;
+    display: none;
+}
+.hangman-draw .the-stand{
+    background-color: var(--color-hang);
+    height: 100%;
+    width: var(--width-hang);
+    position: absolute;
+    transform: translateX(-4px);
+    left: 50%;
+    display: none;
+
+}
+.hangman-draw .the-hang{
+    height: var(--width-hang);
+    background-color: var(--color-hang);
+    width: 200px;
+    position: absolute;
+    top: 20px;
+    display: none;
+
+}
+.hangman-draw .the-hang::before{
+    content: "";
+    height: 12px;
+    width: 12px;
+    border-radius: 10px;
+    position: absolute;
+    top: -3px;
+    left: 22px;
+    background-color: var(--color-hang);
+}
+.hangman-draw .the-rope{
+    border: var(--width-hang) dotted var(--color-hang);
+    height: 65px;
+    border-radius: 50px;
+    position: absolute;
+    left: 213%;
+    top: 45px;
+    width: 65px;
+    display: none;
+
+}
+.hangman-draw .the-rope::before{
+    content: "";
+    height: 23px;
+    position: absolute;
+    right: 27px;
+    top: -29px;
+    border-left: var(--width-hang) dotted var(--color-hang);
+}
+.hangman-draw .head{
+    border: var(--width-hang) solid var(--color-hang);
+    height: 55px;
+    border-radius: 50px;
+    position: absolute;
+    left: 221%;
+    top: 50px;
+    width: 55px;
+    display: none;
+
+}
+.hangman-draw .body{
+    background-color: var(--color-hang);
+    height: 30%;
+    width: var(--width-hang);
+    position: absolute;
+    transform: translateX(-4px);
+    left: 269%;
+    top: 38%;
+    display: none;
+}
+.hangman-draw .hands{
+   position:absolute;
+   display: none;
+}
+.hangman-draw .hands::before{
+    content: " ";
+    background-color: var(--color-hang);
+    height: 60px;
+    width: var(--width-hang);
+    position: absolute;
+    transform: translateX(-4px);
+    left: 138px;
+    top: 121px;
+    transform: rotateZ(40deg);
+}
+
+.hangman-draw .hands::after{
+    content: " ";
+    background-color: var(--color-hang);
+    height: 60px;
+    width: var(--width-hang);
+    position: absolute;
+    transform: translateX(-4px);
+    left: 177px;
+    top: 121px;
+    transform: rotateZ(-40deg);
+}
+
+.hangman-draw .legs{
+    position:absolute;
+    display: none;
+ 
+}
+ .hangman-draw .legs::before{
+    content: " ";
+    background-color: var(--color-hang);
+    height: 70px;
+    width: var(--width-hang);
+    position: absolute;
+    transform: translateX(-4px);
+    left: 143px;
+    top: 179px;
+    transform: rotateZ(25deg);
+ }
+ 
+ .hangman-draw .legs::after{
+    content: " ";
+    background-color: var(--color-hang);
+    height: 70px;
+    width: var(--width-hang);
+    position: absolute;
+    transform: translateX(-4px);
+    left: 173px;
+    top: 179px;
+    transform: rotateZ(-25deg);
+ }
+.hangman-draw.wrong-1 .the-draw{
+    display: block;
+}
+.hangman-draw.wrong-2 .the-stand{
+    display: block;
+}
+.hangman-draw.wrong-3 .the-hang{
+    display: block;
+}
+.hangman-draw.wrong-4 .the-rope{
+    display: block;
+}
+.hangman-draw.wrong-5 .head{
+    display: block;
+}
+.hangman-draw.wrong-6 .body{
+    display: block;
+}
+.hangman-draw.wrong-7 .hands{
+    display: block;
+}
+.hangman-draw.wrong-8 .legs{
+    display: block;
+}
+
+
+.letters{
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 15px;
+    text-align: center;
+}
+.letters.finished{
+    pointer-events: none;
+}
+.letters .letter-box{
+    display: flex;
+    width: 55px;
+    height: 55px;
+    margin: 8px;
+    background-color: darkgray;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    border: 3px solid darkgreen;    
+    cursor: pointer;
+    color: darkgreen;
+    font-size: 20px;
+    text-transform: capitalize;
+}
+@media (max-width:854px) {
+    .row{
+        flex-direction:column;
+        display: block;
+    }
+    .letters .letter-box{
+        width: 40px;
+        height: 40px;
+    }
+}
+.letter-box.clicked{
+    border: 2px solid white;
+    font-size: 17px;
+    pointer-events: none;
+    opacity: 0.8;
+}
+/* end row */
+
+/* start letter-guess */
+.letters-guess{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.letters-guess span{
+    border-bottom: 3px solid lightgrey;
+    width: 7%;
+    height: 35px;
+    margin: 10px 5px;
+    justify-content: center;
+    font-size: 25px;
+    color: cadetblue;
+    font-family: serif;
+    font-weight: bold;
+}
+@media (max-width:854px) {
+    .letters-guess span{
+        width: 6%;
+    }
+}
+/* end letter-guess */
+
+/*start popup */
+.parrent{
+    position: relative;
+    top: -350px;
+    left: 50%;
+    width: 700px;
+    height: 200px;
+    transform: translateX(-350px);
+    text-align: center;
+    display: none;
+}
+.display{
+    display: block;
+}
+.popup-fail{
+    height: 200px;
+    width: 100%;
+    background-color: black;
+    border: 5px solid #f10808;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: red;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+}
+.popup-success{
+    height: 200px;
+    width: 100%;
+    background-color: black;
+    border: 5px solid #f10808;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: red;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+}
+.bottomPLayAgain{
+    position: absolute;
+    bottom: -40px;
+    right: 25px;
+    background-color: darkblue;
+    width: 120px;
+    height: 35px;
+    font-size: 17px;
+    color: white;
+    border-radius: 30px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bottomClose{
+    position: absolute;
+    bottom: -40px;
+    right: 155px;
+    background-color: darkblue;
+    width: 120px;
+    height: 35px;
+    font-size: 17px;
+    color: white;
+    border-radius: 30px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media (max-width:854px) {
+    .parrent{
+        width: 500px;
+        transform: translateX(-250px);
+    }
+    .popup-fail,
+    .popup-success{
+        font-size: 25px;
+    }
+}
+@media (max-width:514px) {
+    .parrent{
+        width: 300px;
+        transform: translateX(-150px);
+    }
+}
+/*end popup */
